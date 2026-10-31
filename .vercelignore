@@ -1,17 +1,39 @@
-# Ignore everything except website folder
-*
-!website/
-!vercel.json
-!.vercelignore
-
-# Ignore backend files
+# Backend files - don't deploy these
 src/
 programs/
 scripts/
-node_modules/
 target/
 .anchor/
+.git/
+
+# Dependencies and config
+node_modules/
 .env
-*.json
-!website/**/*.json
-!vercel.json
+.env.*
+!.env.example
+
+# Build artifacts
+*.log
+*.lock
+
+# Documentation (optional - can remove these lines if you want docs visible)
+README.md
+DEPLOYMENT.md
+MARKETING.md
+WHITEPAPER.md
+README-PLATFORM.md
+DEVNET-GUIDE.md
+SETUP-REAL.md
+SECURITY.md
+CONTRIBUTING.md
+VERCEL-DEPLOY.md
+
+# Project files
+package.json
+package-lock.json
+tsconfig.json
+Anchor.toml
+Cargo.toml
+*.rs
+*.ts
+!website/**/*.ts

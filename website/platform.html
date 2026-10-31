@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starpad - Fair Launch Platform for Solana</title>
+    <meta name="description" content="Launch your token with a fair bonding curve. No presales, no team allocation. Pure community-driven launches on Solana.">
+    <link rel="stylesheet" href="clean-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌕</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <svg class="logo-icon" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <circle cx="16" cy="16" r="14" fill="url(#gradient)" />
+                        <path d="M16 8L20 16L16 24L12 16L16 8Z" fill="white" opacity="0.9"/>
+                        <defs>
+                            <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
+                                <stop offset="0%" stop-color="#9945FF"/>
+                                <stop offset="100%" stop-color="#14F195"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span class="logo-text">starpad</span>
+                </div>
+                <nav class="nav">
+                    <a href="#" class="nav-link active">Explore</a>
+                    <a href="#create" class="nav-link">Launch</a>
+                    <a href="https://docs.moonshot.com" class="nav-link" target="_blank">Docs</a>
+                </nav>
+                <button class="btn-connect" id="connectWallet">
+                    <span>Connect Wallet</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Stats Banner -->
+    <section class="stats-banner">
+        <div class="container">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-value" id="totalCoins">1,234</div>
+                    <div class="stat-label">Tokens Launched</div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <div class="stat-value" id="volume24h">$2.5M</div>
+                    <div class="stat-label">24h Volume</div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <div class="stat-value" id="activeTraders">5,678</div>
+                    <div class="stat-label">Active Traders</div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <div class="stat-value" id="graduated">89</div>
+                    <div class="stat-label">Graduated</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Filters -->
+            <div class="filters-container">
+                <div class="filters">
+                    <button class="filter-btn active" data-filter="all">
+                        <span class="filter-icon">🔥</span>
+                        <span>Trending</span>
+                    </button>
+                    <button class="filter-btn" data-filter="new">
+                        <span class="filter-icon">✨</span>
+                        <span>New</span>
+                    </button>
+                    <button class="filter-btn" data-filter="graduating">
+                        <span class="filter-icon">📈</span>
+                        <span>Graduating</span>
+                    </button>
+                    <button class="filter-btn" data-filter="graduated">
+                        <span class="filter-icon">✓</span>
+                        <span>Graduated</span>
+                    </button>
+                </div>
+                
+                <div class="search-container">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="2"/>
+                        <path d="M14 14L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <input type="text" class="search-input" placeholder="Search tokens..." id="searchInput">
+                </div>
+            </div>
+
+            <!-- Coins Grid -->
+            <div class="coins-grid" id="coinsGrid">
+                <!-- Coins will be loaded here dynamically -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Create Coin Modal -->
+    <div class="modal" id="createModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Launch Your Token</h2>
+                <button class="modal-close" id="closeModal">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <form class="create-form" id="createForm">
+                <div class="form-group">
+                    <label>Coin Name *</label>
+                    <input type="text" name="name" placeholder="e.g., Super Doge" required maxlength="32">
+                    <span class="form-hint">Max 32 characters</span>
+                </div>
+
+                <div class="form-group">
+                    <label>Symbol/Ticker *</label>
+                    <input type="text" name="symbol" placeholder="e.g., SDOGE" required maxlength="10">
+                    <span class="form-hint">Max 10 characters</span>
+                </div>
+
+                <div class="form-group">
+                    <label>Description *</label>
+                    <textarea name="description" placeholder="Tell people why your coin will moon..." required maxlength="500" rows="4"></textarea>
+                    <span class="form-hint">Max 500 characters</span>
+                </div>
+
+                <div class="form-group">
+                    <label>Upload Image *</label>
+                    <div class="file-upload">
+                        <input type="file" name="image" accept="image/*" required id="imageInput">
+                        <label for="imageInput" class="file-upload-label">
+                            <span class="upload-icon">📸</span>
+                            <span>Click to upload</span>
+                        </label>
+                        <div class="image-preview" id="imagePreview"></div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Twitter (optional)</label>
+                        <input type="url" name="twitter" placeholder="https://twitter.com/...">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Telegram (optional)</label>
+                        <input type="url" name="telegram" placeholder="https://t.me/...">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Website (optional)</label>
+                    <input type="url" name="website" placeholder="https://...">
+                </div>
+
+                <div class="info-box">
+                    <div class="info-box-header">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="2"/>
+                            <path d="M10 6V10L13 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <span>Launch Benefits</span>
+                    </div>
+                    <ul class="info-list">
+                        <li>2% creator allocation</li>
+                        <li>0.5% fee on every trade</li>
+                        <li>Auto-graduation to Raydium at $69k</li>
+                        <li>Dedicated token page & chat</li>
+                    </ul>
+                </div>
+
+                <div class="cost-breakdown">
+                    <div class="cost-row">
+                        <span>Creation Cost:</span>
+                        <span>0.02 SOL</span>
+                    </div>
+                    <div class="cost-row total">
+                        <span>Total:</span>
+                        <span>~0.02 SOL</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-create">
+                    <span>Launch Token</span>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Coin Detail Modal -->
+    <div class="modal" id="coinModal">
+        <div class="modal-content coin-detail">
+            <div class="modal-close-btn" id="closeCoinModal">✕</div>
+            
+            <div class="coin-detail-layout">
+                <!-- Left side: Chart & Info -->
+                <div class="coin-detail-left">
+                    <!-- Advanced Chart -->
+                    <div class="chart-section">
+                        <div id="chartControls"></div>
+                        <div class="chart-container">
+                            <div id="chartContainer"></div>
+                        </div>
+                        <div id="priceStats"></div>
+                    </div>
+
+                    <div class="coin-header">
+                        <img src="" alt="" class="coin-image" id="detailImage">
+                        <div class="coin-title-group">
+                            <h2 id="detailName">Coin Name</h2>
+                            <span class="coin-ticker" id="detailSymbol">$SYMBOL</span>
+                        </div>
+                        <div class="creator-badge">
+                            <span>Created by</span>
+                            <span class="creator-address" id="detailCreator">ABC...XYZ</span>
+                        </div>
+                    </div>
+
+                    <div class="coin-description" id="detailDescription">
+                        Description goes here...
+                    </div>
+
+                    <div class="coin-socials" id="detailSocials">
+                        <!-- Social links will be added here -->
+                    </div>
+
+                    <div class="coin-stats-detailed">
+                        <div class="stat-box">
+                            <div class="stat-label">Market Cap</div>
+                            <div class="stat-value" id="detailMcap">$0</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Price</div>
+                            <div class="stat-value" id="detailPrice">$0.000</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Holders</div>
+                            <div class="stat-value" id="detailHolders">0</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">24h Volume</div>
+                            <div class="stat-value" id="detailVolume">$0</div>
+                        </div>
+                    </div>
+
+                    <!-- Progress to graduation -->
+                    <div class="graduation-progress">
+                        <div class="progress-header">
+                            <span>🎓 Progress to DEX</span>
+                            <span id="progressPercent">0%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" id="progressFill"></div>
+                        </div>
+                        <div class="progress-footer">
+                            <span id="currentMcap">$0</span>
+                            <span>$69,000</span>
+                        </div>
+                    </div>
+
+                    <!-- Creator Posts -->
+                    <div class="creator-posts">
+                        <h3>📝 Updates from Creator</h3>
+                        <div class="posts-container" id="postsContainer">
+                            <!-- Posts will be loaded here -->
+                        </div>
+                        <div class="post-form" id="postForm" style="display:none;">
+                            <textarea placeholder="Post an update to your community..." id="postContent" maxlength="500"></textarea>
+                            <button class="btn-post" id="submitPost">📤 Post Update</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right side: Trading -->
+                <div class="coin-detail-right">
+                    <div class="trading-card">
+                        <div class="trade-tabs">
+                            <button class="trade-tab active" data-tab="buy">Buy</button>
+                            <button class="trade-tab" data-tab="sell">Sell</button>
+                        </div>
+
+                        <div class="trade-panel" id="buyPanel">
+                            <div class="input-group">
+                                <label>You pay</label>
+                                <div class="input-wrapper">
+                                    <input type="number" id="buyAmountSol" placeholder="0.0" step="0.01">
+                                    <span class="token-badge">SOL</span>
+                                </div>
+                            </div>
+
+                            <div class="swap-arrow">⬇</div>
+
+                            <div class="input-group">
+                                <label>You receive (est.)</label>
+                                <div class="input-wrapper">
+                                    <input type="text" id="buyAmountTokens" placeholder="0.0" readonly>
+                                    <span class="token-badge token" id="buyTokenSymbol">TOKEN</span>
+                                </div>
+                            </div>
+
+                            <div class="trade-info">
+                                <div class="trade-info-row">
+                                    <span>Price Impact</span>
+                                    <span id="buyPriceImpact">~0%</span>
+                                </div>
+                                <div class="trade-info-row">
+                                    <span>Platform Fee (0.5%)</span>
+                                    <span id="buyPlatformFee">0 SOL</span>
+                                </div>
+                                <div class="trade-info-row">
+                                    <span>Creator Fee (0.5%)</span>
+                                    <span id="buyCreatorFee">0 SOL</span>
+                                </div>
+                            </div>
+
+                            <button class="btn-trade" id="btnBuy">
+                                <span>Buy Tokens</span>
+                            </button>
+                        </div>
+
+                        <div class="trade-panel" id="sellPanel" style="display:none;">
+                            <div class="input-group">
+                                <label>You sell</label>
+                                <div class="input-wrapper">
+                                    <input type="number" id="sellAmountTokens" placeholder="0.0">
+                                    <span class="token-badge token" id="sellTokenSymbol">TOKEN</span>
+                                </div>
+                                <div class="balance">Balance: <span id="tokenBalance">0</span></div>
+                            </div>
+
+                            <div class="swap-arrow">⬇</div>
+
+                            <div class="input-group">
+                                <label>You receive (est.)</label>
+                                <div class="input-wrapper">
+                                    <input type="text" id="sellAmountSol" placeholder="0.0" readonly>
+                                    <span class="token-badge">SOL</span>
+                                </div>
+                            </div>
+
+                            <div class="trade-info">
+                                <div class="trade-info-row">
+                                    <span>Price Impact</span>
+                                    <span id="sellPriceImpact">~0%</span>
+                                </div>
+                                <div class="trade-info-row">
+                                    <span>Fees (1%)</span>
+                                    <span id="sellFees">0 SOL</span>
+                                </div>
+                            </div>
+
+                            <button class="btn-trade sell" id="btnSell">
+                                <span>Sell Tokens</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Chat & Comments System -->
+                    <div id="chatContainer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightweight Charts Library (for advanced charting) -->
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+    
+    <!-- Main Scripts -->
+    <script src="chart.js"></script>
+    <script src="chat.js"></script>
+    <script src="platform.js"></script>
+</body>
+</html>

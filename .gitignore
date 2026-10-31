@@ -1,0 +1,83 @@
+# 🔒 CRITICAL: Never commit these files!
+
+# Environment variables (contains secrets!)
+.env
+.env.local
+.env.*.local
+
+# Solana Keypairs (NEVER commit private keys!)
+*.json
+!package.json
+!package-lock.json
+!tsconfig.json
+devnet-wallet.json
+mainnet-wallet.json
+id.json
+keypair.json
+*.keypair
+
+# Wallet files
+wallet/
+.wallet/
+keypairs/
+
+# Anchor
+.anchor/
+test-ledger/
+target/
+**/*.so
+**/*.wasm
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Build outputs
+dist/
+build/
+out/
+
+# IDL (generated, but you can commit if you want)
+# target/idl/*.json
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.vim/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Temp files
+.cache/
+.temp/
+tmp/
+*.tmp
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Supabase local
+.supabase/
+
+# Testing
+coverage/
+.nyc_output/
+
+# Production configs (add only examples)
+!.env.example

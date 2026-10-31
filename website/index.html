@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starpad - Fair Launch Platform for Solana</title>
+    <meta name="description" content="Launch your token with a fair bonding curve. No presales, no team allocation. Pure community-driven launches on Solana.">
+    <link rel="stylesheet" href="clean-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⭐</text></svg>">
+    <style>
+        .landing-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0F0F0F 0%, #1A1A1A 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .landing-hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(153, 69, 255, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+            animation: pulse 8s ease-in-out infinite;
+        }
+        
+        .landing-hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(20, 241, 149, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -150px;
+            left: -150px;
+            animation: pulse 6s ease-in-out infinite reverse;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.15; }
+            50% { transform: scale(1.1); opacity: 0.25; }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 2rem;
+        }
+        
+        .hero-logo {
+            font-size: 80px;
+            margin-bottom: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #9945FF 0%, #14F195 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: #9CA3AF;
+            margin-bottom: 3rem;
+            line-height: 1.5;
+        }
+        
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem 3rem;
+            background: linear-gradient(135deg, #9945FF 0%, #14F195 100%);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.25rem;
+            border-radius: 12px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 10px 30px rgba(153, 69, 255, 0.4);
+        }
+        
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(153, 69, 255, 0.6);
+        }
+        
+        .features-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+            text-align: left;
+        }
+        
+        .feature-item {
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .feature-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(153, 69, 255, 0.4);
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-desc {
+            font-size: 0.9rem;
+            color: #9CA3AF;
+        }
+    </style>
+</head>
+<body>
+    <div class="landing-hero">
+        <div class="hero-content">
+            <div class="hero-logo">⭐</div>
+            <h1 class="hero-title">Starpad</h1>
+            <p class="hero-subtitle">
+                Fair Launch Platform for Solana<br>
+                No presales. No team allocation. Pure bonding curves.
+            </p>
+            <a href="platform.html" class="hero-cta">
+                <span>Launch App</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </a>
+            
+            <div class="features-preview">
+                <div class="feature-item">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-title">Fair Launch</div>
+                    <div class="feature-desc">No presales or insider advantages</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💎</div>
+                    <div class="feature-title">Bonding Curve</div>
+                    <div class="feature-desc">Automated price discovery</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔄</div>
+                    <div class="feature-title">Auto-Graduate</div>
+                    <div class="feature-desc">Migrates to Raydium at $69k</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💬</div>
+                    <div class="feature-title">Live Chat</div>
+                    <div class="feature-desc">Built-in community features</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

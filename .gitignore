@@ -10,6 +10,7 @@
 !package.json
 !package-lock.json
 !tsconfig.json
+!vercel.json
 devnet-wallet.json
 mainnet-wallet.json
 id.json

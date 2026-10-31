@@ -1,0 +1,17 @@
+# Ignore everything except website folder
+*
+!website/
+!vercel.json
+!.vercelignore
+
+# Ignore backend files
+src/
+programs/
+scripts/
+node_modules/
+target/
+.anchor/
+.env
+*.json
+!website/**/*.json
+!vercel.json
